@@ -7,8 +7,8 @@ namespace Knp\DoctrineBehaviors\EventSubscriber;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
-use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 
 #[AsDoctrineListener(event: Events::loadClassMetadata)]
 final class TimestampableEventSubscriber
@@ -26,7 +26,7 @@ final class TimestampableEventSubscriber
             return;
         }
 
-        if (!is_a($classMetadata->reflClass->getName(), TimestampableInterface::class, true)) {
+        if (! is_a($classMetadata->reflClass->getName(), TimestampableInterface::class, true)) {
             return;
         }
 
@@ -38,7 +38,7 @@ final class TimestampableEventSubscriber
         $classMetadata->addLifecycleCallback('updateTimestamps', Events::preUpdate);
 
         foreach (['createdAt', 'updatedAt'] as $field) {
-            if (!$classMetadata->hasField($field)) {
+            if (! $classMetadata->hasField($field)) {
                 $classMetadata->mapField([
                     'fieldName' => $field,
                     'type' => $this->timestampableDateFieldType,
@@ -50,7 +50,6 @@ final class TimestampableEventSubscriber
 
     public function prePersist(LifecycleEventArgs $lifecycleEventArgs): void
     {
-
     }
 
     /**

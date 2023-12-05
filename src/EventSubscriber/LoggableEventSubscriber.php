@@ -6,8 +6,8 @@ namespace Knp\DoctrineBehaviors\EventSubscriber;
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Events;
-use Knp\DoctrineBehaviors\Contract\Entity\LoggableInterface;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Knp\DoctrineBehaviors\Contract\Entity\LoggableInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
