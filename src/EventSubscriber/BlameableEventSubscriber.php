@@ -135,14 +135,6 @@ final class BlameableEventSubscriber
             ->propertyChanged($entity, self::DELETED_BY, $oldDeletedBy, $user);
     }
 
-    /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [Events::prePersist, Events::preUpdate, Events::preRemove, Events::loadClassMetadata];
-    }
-
     private function mapEntity(ClassMetadataInfo $classMetadataInfo): void
     {
         if ($this->blameableUserEntity !== null && class_exists($this->blameableUserEntity)) {

@@ -73,14 +73,6 @@ final class TranslatableEventSubscriber
     }
 
     /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [Events::loadClassMetadata, Events::postLoad, Events::prePersist];
-    }
-
-    /**
      * Convert string FETCH mode to required string
      */
     private function convertFetchString(string|int $fetchMode): int
@@ -164,7 +156,7 @@ final class TranslatableEventSubscriber
 
     private function setLocales(LifecycleEventArgs $lifecycleEventArgs): void
     {
-        $entity = $lifecycleEventArgs->getEntity();
+        $entity = $lifecycleEventArgs->getObject();
         if (! $entity instanceof TranslatableInterface) {
             return;
         }

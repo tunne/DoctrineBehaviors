@@ -53,14 +53,6 @@ final class SluggableEventSubscriber
         $this->processLifecycleEventArgs($lifecycleEventArgs);
     }
 
-    /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [Events::loadClassMetadata, Events::prePersist, Events::preUpdate];
-    }
-
     private function shouldSkip(ClassMetadataInfo $classMetadataInfo): bool
     {
         if (! is_a($classMetadataInfo->getName(), SluggableInterface::class, true)) {

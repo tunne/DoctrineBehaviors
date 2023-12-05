@@ -46,12 +46,4 @@ final class UuidableEventSubscriber
 
         $entity->generateUuid();
     }
-
-    /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [Events::loadClassMetadata, Events::prePersist];
-    }
 }

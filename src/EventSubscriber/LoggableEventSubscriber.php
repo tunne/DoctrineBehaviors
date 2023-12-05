@@ -54,14 +54,6 @@ final class LoggableEventSubscriber
     }
 
     /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [Events::postPersist, Events::postUpdate, Events::preRemove];
-    }
-
-    /**
      * Logs entity changeset
      */
     private function logChangeSet(LifecycleEventArgs $lifecycleEventArgs): void

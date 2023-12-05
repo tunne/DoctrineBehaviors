@@ -51,12 +51,4 @@ final class TimestampableEventSubscriber
     public function prePersist(LifecycleEventArgs $lifecycleEventArgs): void
     {
     }
-
-    /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [Events::loadClassMetadata];
-    }
 }

@@ -63,12 +63,4 @@ final class SoftDeletableEventSubscriber
             'nullable' => true,
         ]);
     }
-
-    /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [Events::onFlush, Events::loadClassMetadata];
-    }
 }

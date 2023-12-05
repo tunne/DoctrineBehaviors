@@ -34,12 +34,4 @@ final class TreeEventSubscriber
             'length' => 255,
         ]);
     }
-
-    /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [Events::loadClassMetadata];
-    }
 }
