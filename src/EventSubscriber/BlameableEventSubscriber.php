@@ -8,7 +8,7 @@ use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Knp\DoctrineBehaviors\Contract\Entity\BlameableInterface;
@@ -135,7 +135,7 @@ final class BlameableEventSubscriber
             ->propertyChanged($entity, self::DELETED_BY, $oldDeletedBy, $user);
     }
 
-    private function mapEntity(ClassMetadataInfo $classMetadataInfo): void
+    private function mapEntity(ClassMetadata $classMetadataInfo): void
     {
         if ($this->blameableUserEntity !== null && class_exists($this->blameableUserEntity)) {
             $this->mapManyToOneUser($classMetadataInfo);
@@ -149,21 +149,21 @@ final class BlameableEventSubscriber
         return $this->entityManager->getUnitOfWork();
     }
 
-    private function mapManyToOneUser(ClassMetadataInfo $classMetadataInfo): void
+    private function mapManyToOneUser(ClassMetadata $classMetadataInfo): void
     {
         $this->mapManyToOneWithTargetEntity($classMetadataInfo, self::CREATED_BY);
         $this->mapManyToOneWithTargetEntity($classMetadataInfo, self::UPDATED_BY);
         $this->mapManyToOneWithTargetEntity($classMetadataInfo, self::DELETED_BY);
     }
 
-    private function mapStringUser(ClassMetadataInfo $classMetadataInfo): void
+    private function mapStringUser(ClassMetadata $classMetadataInfo): void
     {
         $this->mapStringNullableField($classMetadataInfo, self::CREATED_BY);
         $this->mapStringNullableField($classMetadataInfo, self::UPDATED_BY);
         $this->mapStringNullableField($classMetadataInfo, self::DELETED_BY);
     }
 
-    private function mapManyToOneWithTargetEntity(ClassMetadataInfo $classMetadataInfo, string $fieldName): void
+    private function mapManyToOneWithTargetEntity(ClassMetadata $classMetadataInfo, string $fieldName): void
     {
         if ($classMetadataInfo->hasAssociation($fieldName)) {
             return;
@@ -180,7 +180,7 @@ final class BlameableEventSubscriber
         ]);
     }
 
-    private function mapStringNullableField(ClassMetadataInfo $classMetadataInfo, string $fieldName): void
+    private function mapStringNullableField(ClassMetadata $classMetadataInfo, string $fieldName): void
     {
         if ($classMetadataInfo->hasField($fieldName)) {
             return;
